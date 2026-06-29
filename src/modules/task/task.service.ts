@@ -4,8 +4,6 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task } from './entities/task.entity';
 import { Repository } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
-
 @Injectable()
 export class TaskService {
   constructor(
@@ -14,6 +12,7 @@ export class TaskService {
   ) {}
 
   async create(createTaskDto: CreateTaskDto): Promise<Task> {
+    const { v4: uuidv4 } = await import('uuid');
     const newId = uuidv4();
     const newTaskData = { ...createTaskDto, ID: newId };
     const newTask = this.taskRepository.create(newTaskData);
