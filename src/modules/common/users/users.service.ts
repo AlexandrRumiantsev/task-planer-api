@@ -24,13 +24,25 @@ export class UsersService {
     return await this.usersRepository.save(newUser);
   }
 
-  async findByLoginAndPassword(login: string, password: string): Promise<UserCommon | null> {
-    console.log('password:::',password)
-    console.log('login:::',login)
+  async findByLoginAndPassword(login: string, plainPassword: string): Promise<UserCommon | null | string> {
 
-    return this.usersRepository.findOne({
-      where: { login, password},
+    const user = await this.usersRepository.findOne({
+      where: { login },
     });
+
+    if (!user) {
+      return 'Пользователь не найден';
+    }
+    
+    const isPasswordValid = await this.comparePassword(plainPassword, user.hashedPassword);
+
+    if (isPasswordValid) {
+      console.log('Пароль верный, вход разрешен');
+      return user;
+    } else {
+      console.log('Неверный пароль');
+      return null;
+    }
   }
 
   async delete(id: number): Promise<void> {

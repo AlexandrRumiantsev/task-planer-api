@@ -3,13 +3,15 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiBody, ApiParam, ApiResponse, ApiProperty, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 
-// Класс DTO для тела запроса
 class LoginDto {
   @ApiProperty({ example: 'example_user', description: 'Имя пользователя' })
   username: string;
 
   @ApiProperty({ example: 'secure_password', description: 'Пароль пользователя' })
   password: string;
+
+  @ApiProperty({ example: 'secure_password', description: 'ХЕШ Пароль пользователя' })
+  hashedPassword: string;
 }
 
 @Controller('auth')
@@ -21,8 +23,8 @@ export class AuthController {
   @ApiBody({ type: LoginDto, description: 'Форма для входа' })
   @ApiResponse({ status: 200, description: 'Успешная авторизация.' })
   @ApiResponse({ status: 401, description: 'Некорректные учётные данные.' })
-  async login(@Body() body: LoginDto) {
-    const user = await this.authService.validateUser(body.username, body.password);
+  async login(@Request() req) {
+    const user = await this.authService.validateUser(req.body.username, req.body.password);
     return { access_token: this.authService.generateToken(user.id) };
   }
 

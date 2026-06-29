@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { UserCommon } from '../users/user.entity';
 import { JwtService } from '@nestjs/jwt';
@@ -12,7 +12,7 @@ export class AuthService {
     const user = await this.usersService.findByLoginAndPassword(username, password);
 
     if (!user) {
-      throw new Error('User Not Found');
+      throw new HttpException('Invalid credentials', HttpStatus.NOT_FOUND); 
     }
 
     return user;
