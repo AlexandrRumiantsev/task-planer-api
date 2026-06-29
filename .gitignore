@@ -1,0 +1,29 @@
+# Игнорируем файлы настроек IDE
+.idea/
+*.iml
+
+# Скрываем каталоги и файлы сборки
+build/
+dist/
+target/
+out/
+
+# Скрытые файлы ОС
+.DS_Store
+Thumbs.db
+
+# Файлы виртуального окружения Python
+venv/
+__pycache__/
+*.pyc
+
+# Лог-файлы и временные файлы
+logs/
+tmp/
+*.log
+*.tmp
+
+# Конфигурационные файлы пользователя
+config.json
+.env
+node_modules

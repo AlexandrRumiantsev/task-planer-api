@@ -1,0 +1,367 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/health/check-database": {
+      "get": {
+        "operationId": "AppController_checkDatabaseHealth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/api": {
+      "get": {
+        "operationId": "SwaggerController_getSwaggerUi",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Swagger"
+        ]
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "operationId": "UsersController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "User identifier",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "operationId": "UsersController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/users": {
+      "get": {
+        "operationId": "UsersController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      },
+      "post": {
+        "operationId": "UsersController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Форма для входа",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная авторизация."
+          },
+          "401": {
+            "description": "Некорректные учётные данные."
+          }
+        },
+        "summary": "Авторизация пользователя",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "operationId": "AuthController_getProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Пользователь успешно авторизован.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "username": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Требуется авторизация."
+          }
+        },
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
+        "summary": "Получение профиля текущего пользователя",
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/task": {
+      "post": {
+        "operationId": "TaskController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Задачи"
+        ]
+      },
+      "get": {
+        "operationId": "TaskController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Задачи"
+        ]
+      }
+    },
+    "/api/task/{id}": {
+      "get": {
+        "operationId": "TaskController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Задачи"
+        ]
+      },
+      "patch": {
+        "operationId": "TaskController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTaskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Задачи"
+        ]
+      },
+      "delete": {
+        "operationId": "TaskController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Задачи"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "NEAT API",
+    "description": "API документация проекта NEAT",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "example_user",
+            "description": "Имя пользователя"
+          },
+          "password": {
+            "type": "string",
+            "example": "secure_password",
+            "description": "Пароль пользователя"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "CreateTaskDto": {
+        "type": "object",
+        "properties": {
+          "TITLE": {
+            "type": "string",
+            "description": "Название или заголовок задачи",
+            "example": "Подготовить отчет за квартал"
+          },
+          "TEXT": {
+            "type": "string",
+            "description": "Детальное описание задачи",
+            "example": "Необходимо собрать данные из CRM, проанализировать продажи и оформить в презентацию."
+          },
+          "DATE_START": {
+            "type": "string",
+            "description": "Дата и время начала задачи",
+            "example": "2026-06-25T10:00:00"
+          },
+          "DATE_END": {
+            "type": "string",
+            "description": "Дата и время окончания задачи",
+            "example": "2026-06-30T18:00:00"
+          }
+        },
+        "required": [
+          "TITLE",
+          "TEXT",
+          "DATE_START",
+          "DATE_END"
+        ]
+      },
+      "UpdateTaskDto": {
+        "type": "object",
+        "properties": {
+          "TITLE": {
+            "type": "string",
+            "description": "Название или заголовок задачи",
+            "example": "Подготовить отчет за квартал"
+          },
+          "TEXT": {
+            "type": "string",
+            "description": "Детальное описание задачи",
+            "example": "Необходимо собрать данные из CRM, проанализировать продажи и оформить в презентацию."
+          },
+          "DATE_START": {
+            "type": "string",
+            "description": "Дата и время начала задачи",
+            "example": "2026-06-25T10:00:00"
+          },
+          "DATE_END": {
+            "type": "string",
+            "description": "Дата и время окончания задачи",
+            "example": "2026-06-30T18:00:00"
+          }
+        }
+      }
+    }
+  }
+}
