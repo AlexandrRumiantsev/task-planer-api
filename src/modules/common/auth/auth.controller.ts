@@ -4,8 +4,8 @@ import { ApiOperation, ApiBody, ApiParam, ApiResponse, ApiProperty, ApiBearerAut
 import { AuthService } from './auth.service';
 
 class LoginDto {
-  @ApiProperty({ example: 'example_user', description: 'Имя пользователя' })
-  username: string;
+  @ApiProperty({ example: 'example_login', description: 'Логин пользователя' })
+  login: string;
 
   @ApiProperty({ example: 'secure_password', description: 'Пароль пользователя' })
   password: string;
@@ -22,7 +22,7 @@ export class AuthController {
   @ApiResponse({ status: 200, description: 'Успешная авторизация.' })
   @ApiResponse({ status: 401, description: 'Некорректные учётные данные.' })
   async login(@Request() req) {
-    const user = await this.authService.validateUser(req.body.username, req.body.password);
+    const user = await this.authService.validateUser(req.body.login, req.body.password);
     return { access_token: this.authService.generateToken(user.id) };
   }
 

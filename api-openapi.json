@@ -290,10 +290,10 @@
       "LoginDto": {
         "type": "object",
         "properties": {
-          "username": {
+          "login": {
             "type": "string",
-            "example": "example_user",
-            "description": "Имя пользователя"
+            "example": "example_login",
+            "description": "Логин пользователя"
           },
           "password": {
             "type": "string",
@@ -302,7 +302,7 @@
           }
         },
         "required": [
-          "username",
+          "login",
           "password"
         ]
       },

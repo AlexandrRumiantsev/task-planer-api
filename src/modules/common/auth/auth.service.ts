@@ -8,8 +8,8 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
-    const user = await this.usersService.findByLoginAndPassword(username, password);
+  async validateUser(login: string, password: string): Promise<any> {
+    const user = await this.usersService.findByLoginAndPassword(login, password);
     if (!user) {
       throw new HttpException('Invalid credentials', HttpStatus.NOT_FOUND); 
     }
