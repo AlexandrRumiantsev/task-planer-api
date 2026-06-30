@@ -31,10 +31,10 @@ export class UsersService {
     });
 
     if (!user) {
-      return 'Пользователь не найден';
+      return null;
     }
     
-    const isPasswordValid = await this.comparePassword(plainPassword, user.hashedPassword);
+    const isPasswordValid = await this.comparePassword(plainPassword, user.password);
 
     if (isPasswordValid) {
       console.log('Пароль верный, вход разрешен');

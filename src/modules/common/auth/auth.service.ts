@@ -10,7 +10,6 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.findByLoginAndPassword(username, password);
-
     if (!user) {
       throw new HttpException('Invalid credentials', HttpStatus.NOT_FOUND); 
     }

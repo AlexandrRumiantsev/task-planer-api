@@ -10,8 +10,6 @@ class LoginDto {
   @ApiProperty({ example: 'secure_password', description: 'Пароль пользователя' })
   password: string;
 
-  @ApiProperty({ example: 'secure_password', description: 'ХЕШ Пароль пользователя' })
-  hashedPassword: string;
 }
 
 @Controller('auth')

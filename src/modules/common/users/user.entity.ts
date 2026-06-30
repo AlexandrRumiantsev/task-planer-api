@@ -17,6 +17,4 @@ export class UserCommon {
   @Column()
   password: string;
 
-  @Column()
-  hashedPassword: string;
 }
