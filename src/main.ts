@@ -4,13 +4,9 @@ import * as fs from 'fs';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
-import * as multer from 'multer';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
-
-    const upload = multer();
-    app.use(upload.any());
 
     app.enableCors({
       origin: '*',
