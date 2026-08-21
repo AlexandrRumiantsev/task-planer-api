@@ -37,6 +37,7 @@
     "fastify-static": "^4.7.0",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.16.1",
     "npm": "^11.16.0",
